@@ -1,0 +1,208 @@
+      <!--      ----       ----      --Kunde--     ----      ----      ----   -->
+<div class="table-responsive">
+  <h1>Kunde</h1>
+  <mat-form-field>
+    <!-- Find Kunde, søgefelt -->
+    <input (keyup)="applyFilterKunde($event.target.value)" matInput placeholder="Filter"> <!---->
+  </mat-form-field> 
+
+  <!-- Tabel for Kunder, får informationer fra dataSource -->
+  <table mat-table [dataSource]="dataSource" matSort class="mat-table"> <!---->
+
+    <!-- Fornavn Kolonne -->
+    <!-- Display fornavn data for cellen -->
+    <ng-container matColumnDef="fornavn"> 
+      <!---->
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fornavn </th>
+        <!---->
+        <td mat-cell *matCellDef="let element"> {{element.fornavn}} </td>
+      </ng-container>
+    
+      <!-- Efternavn Kolonne -->
+      <ng-container matColumnDef="efternavn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Efternavn </th>
+        <td mat-cell *matCellDef="let element"> {{element.efternavn}} </td>
+      </ng-container>
+    
+      <!-- Prostatus Kolonne -->
+      <ng-container matColumnDef="proStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Pro Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.proStatus}} </td>
+      </ng-container>
+    
+      <!-- Antal Sendte Ansøgninger Kolonne -->
+      <ng-container matColumnDef="sendtAnsoegning">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Antal Sendte Ansøgninger </th>
+          <td mat-cell *matCellDef="let element"> {{element.sendtAnsoegning}} </td>
+        </ng-container>
+  
+        <!-- Arbejde Nr. 1 Kolonne -->
+      <ng-container matColumnDef="godkendtArb01">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejde Nr. 1 </th>
+          <td mat-cell *matCellDef="let element"> {{element.godkendtArb01}} </td>
+        </ng-container>
+        <!-- Arbejde Nr. 2 Kolonne -->
+        <ng-container matColumnDef="godkendtArb02">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejde Nr. 2 </th>
+          <td mat-cell *matCellDef="let element"> {{element.godkendtArb02}} </td>
+        </ng-container>
+      
+        <!-- Arbejde Nr. 3 Kolonne -->
+        <ng-container matColumnDef="godkendtArb03">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejde Nr. 3 </th>
+            <td mat-cell *matCellDef="let element"> {{element.godkendtArb03}} </td> 
+        </ng-container>
+
+        <!-- Aktions Kolonne -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktioner </th>
+          <td mat-cell *matCellDef="let element" class="action-link"> 
+            <!---->
+            <button mat-button color="accent" (click)="openDialog('Update',element)">Rediger</button> |
+            <button mat-button color="primary" (click)="openDialog('Delete',element)">Slet</button>
+          </td> 
+      </ng-container>
+
+      <!-- Display Kunde for header -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Display Kunde for header -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<!--      ----       ----      --Job--     ----      ----      ----   -->
+
+<div class="table-responsive">
+  <h1>Job</h1>
+  <mat-form-field>
+      <!-- Find Job, søgefelt -->
+      <input (keyup)="applyFilterJob($event.target.value)" matInput placeholder="Filter">
+  </mat-form-field>
+  <!-- Tabel for Filer, får informationer fra dataSourceJ -->
+  <table mat-table [dataSource]="dataSourceJ" matSort class="mat-table">
+    
+      <!-- Arbejds typer Kolonne -->
+      <ng-container matColumnDef="arbejdstype">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejds typer </th>
+        <td mat-cell *matCellDef="let element"> {{element.arbejdstype}} </td>
+      </ng-container>
+    
+      <!-- Job Overskrift Kolonne -->
+      <ng-container matColumnDef="jobOverskrift">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Overskrift </th>
+        <td mat-cell *matCellDef="let element"> {{element.jobOverskrift}} </td>
+      </ng-container>
+    
+      <!-- Job Beskrivelse Kolonne -->
+      <ng-container matColumnDef="jobBeskrivelse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Beskrivelse </th>
+        <td mat-cell *matCellDef="let element"> {{element.jobBeskrivelse}} </td>
+      </ng-container>
+    
+      <!-- Job Start Tidspunkt Kolonne -->
+      <ng-container matColumnDef="jobStartTidspunkt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Start Tidspunkt </th>
+          <td mat-cell *matCellDef="let element"> {{element.jobStartTidspunkt}} </td>
+        </ng-container>
+  
+        <!-- Job Slut Tidspunkt 1 Kolonne -->
+      <ng-container matColumnDef="jobSlutTidspunkt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Slut Tidspunkt </th>
+          <td mat-cell *matCellDef="let element"> {{element.jobSlutTidspunkt}} </td>
+        </ng-container>
+  
+        <!-- Aktions Kolonne -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktioner </th>
+          <td mat-cell *matCellDef="let element"> 
+            <button mat-button color="accent" (click)="openDialogJob('Update',element)">Rediger</button> |
+            <button mat-button color="primary" (click)="openDialogJob('Delete',element)">Slet</button>
+          </td> 
+      </ng-container>
+
+      <!-- Display Job for header -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsJ"></tr>
+      <!-- Display Job for header -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsJ;"></tr>
+  </table>
+</div>
+
+<!--      ----       ----      --Arbejdstype--     ----      ----      ----   -->
+
+<div class="table-responsive">
+  <h1>Job Type</h1>
+  <mat-form-field>
+      <!-- Find Arbejdstype, søgefelt -->
+      <input (keyup)="applyFilterJobType($event.target.value)" matInput placeholder="Filter">
+  </mat-form-field> 
+
+  <!-- Tilføj Arbejdstype, tilføjelses knap -->
+  <button mat-raised-button color="primary" (click)="openDialogType('Add',{})">Tilføj Job Type</button>
+  <!-- Tabel for Arbejdstype, får informationer fra dataSourceJT -->
+  <table mat-table [dataSource]="dataSourceJT" matSort class="mat-table">
+    <!-- Fornavn Kolonne -->
+    <ng-container matColumnDef="arbejdstype1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejds type </th>
+      <td mat-cell *matCellDef="let element"> {{element.arbejdstype1}} </td>
+    </ng-container>
+
+      <!-- Arbejds type Beskrivelse Kolonne -->
+      <ng-container matColumnDef="arbejdstypeBeskrivelse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejds type Beskrivelse </th>
+        <td mat-cell *matCellDef="let element"> {{element.arbejdstypeBeskrivelse}} </td>
+      </ng-container>
+
+      <!-- Aktions Kolonne -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktioner </th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <button mat-button color="accent" (click)="openDialogType('Update',element)">Rediger</button> |
+          <button mat-button color="primary" (click)="openDialogType('Delete',element)">Slet</button> 
+        </td> 
+      </ng-container>
+
+      <!-- Display Arbejdstype for header -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsJT"></tr>
+      <!-- Display Arbejdstype for header -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsJT;"></tr>
+  </table>
+</div>
+
+<!--      ----       ----      --Filer--     ----      ----      ----   -->
+
+<div class="table-responsive">
+  <h1>Filer</h1>
+  <mat-form-field>
+      <!-- Find Filer søgefelt -->
+      <input (keyup)="applyFilterFiler($event.target.value)" matInput placeholder="Filter">
+  </mat-form-field> 
+  <!-- Tabel for Filer, får informationer fra dataSourceF -->
+  <table mat-table [dataSource]="dataSourceF" matSort class="mat-table">
+    
+      <!-- Dokumentation Kolonne -->
+      <ng-container matColumnDef="dokumentationLink">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dokumentation </th>
+        <td mat-cell *matCellDef="let element"> {{element.dokumentationLink}} </td>
+      </ng-container>
+    
+      <!-- Billed Link Kolonne -->
+      <ng-container matColumnDef="billedeLink">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Billed Link </th>
+        <td mat-cell *matCellDef="let element"> {{element.billedeLink}} </td>
+      </ng-container>
+
+      <!-- Aktions Kolonne -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktioner </th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <button mat-button color="accent" (click)="openDialogFiler('Update',element)">Rediger</button> |
+          <button mat-button color="primary" (click)="openDialogFiler('Delete',element)">Slet</button>    
+        </td> 
+      </ng-container>
+
+       <!-- Display Filer for header -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsF"></tr>
+      <!-- Display Filer for række -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsF;"></tr>
+  </table>
+</div>

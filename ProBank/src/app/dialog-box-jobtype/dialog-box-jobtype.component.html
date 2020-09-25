@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialg.content>
+    <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+        <input placeholder="Arbejdstyper" matInput [(ngModel)]="local_data.arbejdstype1">
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete';">
+        <input placeholder="Arbejdstype Beskrivelser" matInput [(ngModel)]="local_data.arbejdstypeBeskrivelse">
+    </mat-form-field>
+    <ng-template #elseTemplate>
+        Sure to delete <b>{{local_data.arbejdstype1}}</b>
+    </ng-template>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="doAction()" mat-flat-button color="accent">{{action}}</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

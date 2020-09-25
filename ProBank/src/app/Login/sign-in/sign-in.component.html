@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput placeholder="Brugernavn" type="text" name="brugernavn" formControlName="brugernavn" >
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Kodeord" type="password" name="kodeord" formControlName="kodeord" >
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Login</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
