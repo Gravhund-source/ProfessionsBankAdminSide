@@ -44,7 +44,7 @@ export class SignInComponent implements OnInit {
 
       if (this.brugernavn.value == result.bruger1.brugernavn && this.kodeord.value == result.bruger1.kodeord
         || this.brugernavn.value == result.bruger2.brugernavn && this.kodeord.value == result.bruger2.kodeord) {
-        localStorage.setItem('IsLoggedIn','true')
+        localStorage.setItem('IsLoggedIn','true')//sætter item "IsLoggedIn" til true, dette vil Auth.Guard checke.
         this.router.navigate(['admin']); //Router navigate naviger en fra login over til admin siden.
       }
       else {

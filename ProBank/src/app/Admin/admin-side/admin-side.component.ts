@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { MatInput } from '@angular/material/input';
 
 import { Router } from '@angular/router';
 import { HttpService } from '../../Service/http.service';
@@ -90,6 +88,10 @@ export class AdminSideComponent implements OnInit {
   }
   ngOnInit() {    
   }
+  OnLoggedOut(){
+    localStorage.removeItem('IsLoggedIn') //fjerner IsLoggedIn fra storage, så man ikke kan komme ind.
+    this.router.navigate(['login']); // bruger bliver sendt tilbage til login.
+  }
   //#region (KS) OpenDialog, addRowDataType, updateRowData og deleteRowData
   /*
                                           ---     KOMMENTAR SEKTION     ---     
@@ -130,10 +132,6 @@ export class AdminSideComponent implements OnInit {
       Den får en værdi krævet for at vide hvilken kunde det er der skal slettes.
   */
   //#endregion
-  OnLoggedOut(){
-    localStorage.removeItem('IsLoggedIn')
-    this.router.navigate(['login']);
-  }
   //#region OpenDialog
   openDialogType(action, obj) {
     obj.action = action;

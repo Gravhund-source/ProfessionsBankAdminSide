@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch:'full'},
   { path: 'login', component: SignInComponent},
   { path: 'admin', component: AdminSideComponent, canActivate:[
-    AuthGuard
+    AuthGuard //hvis brugeren vil ind på admin så skal han igennem AuthGuard først.
   ]},
 ];
 
