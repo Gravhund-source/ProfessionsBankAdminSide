@@ -7,4 +7,6 @@ export class Job {
     kundeProId: number;
     jobStartTidspunkt: Date;
     jobSlutTidspunkt: Date;
+    kundeID: number;
+    kundeProID: number;
 }

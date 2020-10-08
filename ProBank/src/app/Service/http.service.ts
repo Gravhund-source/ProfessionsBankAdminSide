@@ -77,7 +77,7 @@ export class HttpService {
     return this.http.get<Arbejdstype[]>(`${this.urlStart}Arbejdstype`);
   }
   postArbejdstype(arbejdstypeToAdd: any): Observable<Arbejdstype> {
-    return this.http.post<Arbejdstype>(`${this.urlStart}Arbejdstype/`, arbejdstypeToAdd, httpOptions); //Tilføjer data til en række i den udvalgte tabbel og får at vide hvilken måde den skal få data´erne på.
+    return this.http.post<Arbejdstype>(`${this.urlStart}Arbejdstype/`, arbejdstypeToAdd, httpOptions); //Tilføjer data til en række i den udvalgte tabel og får at vide hvilken måde den skal få data´erne på.
   }
   deleteArbejdstype(arbejdstypeToDelete: number):Observable<Arbejdstype> {
     return this.http.delete<Arbejdstype>(`${this.urlStart}Arbejdstype/${arbejdstypeToDelete}`, httpOptions);

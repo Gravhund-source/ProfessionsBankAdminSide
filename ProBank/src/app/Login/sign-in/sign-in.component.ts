@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdminLogin } from 'src/app/Models/AdminLogin';
 import { HttpService } from 'src/app/Service/http.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { AdminSideComponent } from 'src/app/Admin/admin-side/admin-side.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,6 +14,7 @@ export class SignInComponent implements OnInit {
   form: FormGroup;
   adminl: AdminLogin[];
   adminLOGIN: AdminLogin;
+  AdminIn: AdminSideComponent;
 
   get brugernavn() { return this.form.get('brugernavn'); } //brugernavn & kodeord bliver hentet fra form.
   get kodeord() { return this.form.get('kodeord'); } //Den bliver bekræftet ved det ord som vi har skrevet inde i ''.
@@ -20,7 +22,7 @@ export class SignInComponent implements OnInit {
   constructor(private httpService: HttpService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.httpService.getAdmin().subscribe((adminLoginInfo: any) => { //httpservice henter data som så bliver puttet ind i adminLoginInfo
+    this.httpService.getAdmin().subscribe((adminLoginInfo: any) => { //httpservice henter data som så bliver puttet ind i adminLoginInfo.
       this.adminl = adminLoginInfo; //adminl får værdier fra adminLoginInfo.
 
       return this.adminl; //adminl bliver retuneret til programmet.
@@ -42,6 +44,7 @@ export class SignInComponent implements OnInit {
 
       if (this.brugernavn.value == result.bruger1.brugernavn && this.kodeord.value == result.bruger1.kodeord
         || this.brugernavn.value == result.bruger2.brugernavn && this.kodeord.value == result.bruger2.kodeord) {
+        localStorage.setItem('IsLoggedIn','true')
         this.router.navigate(['admin']); //Router navigate naviger en fra login over til admin siden.
       }
       else {
