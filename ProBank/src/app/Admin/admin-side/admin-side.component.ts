@@ -14,6 +14,7 @@ import { DialogBoxJobtypeComponent } from 'src/app/dialog-box-jobtype/dialog-box
 import { DialogBoxFilerComponent } from 'src/app/dialog-box-filer/dialog-box-filer.component';
 import { DialogBoxJobComponent } from 'src/app/dialog-box-job/dialog-box-job.component';
 import { SignInComponent} from 'src/app/Login/sign-in/sign-in.component';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-side',
@@ -56,11 +57,13 @@ export class AdminSideComponent implements OnInit {
   dataSourceJT: MatTableDataSource<Arbejdstype>;
   dataSourceF: MatTableDataSource<Filer>;
   dataSource: MatTableDataSource<Kunde>;
+  dataSourceKJ: MatTableDataSource<[Kunde, Job]>;
 
   displayedColumns = ['fornavn', 'efternavn', 'proStatus', 'sendtAnsoegning', 'godkendtArb01', 'godkendtArb02', 'godkendtArb03', 'action'];
   displayedColumnsJT = ['arbejdstype1', 'arbejdstypeBeskrivelse', 'action'];
   displayedColumnsJ = ['arbejdstype', 'jobOverskrift', 'jobBeskrivelse', 'jobStartTidspunkt', 'jobSlutTidspunkt', 'action'];
-  displayedColumnsF = ['dokumentationLink', 'billedeLink', 'action'];
+  displayedColumnsF = ['dokumentationLink', 'billedeLink', 'action']; //'Fornavn',
+  displayedColumnsKJ = ['arbejdstype', 'jobOverskrift', 'jobBeskrivelse', 'jobStartTidspunkt', 'jobSlutTidspunkt', 'kundeID', 'kundeProID', 'action'];
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   //#region (KS) Constructor og Get
@@ -76,17 +79,24 @@ export class AdminSideComponent implements OnInit {
     this.httpService.getKunde().subscribe((kunde) => { //HttpServices Getkunde Bliver kaldt og kunde parameteren bliver lavet.
       this.dataSource = new MatTableDataSource(kunde); //DataSource får data fra DataTableSource som er forbundet til getkunde.
     })
+
     this.httpService.getJob().subscribe((job) => {
       this.dataSourceJ = new MatTableDataSource(job);
     })
+
     this.httpService.getFiler().subscribe((filer) => {
       this.dataSourceF = new MatTableDataSource(filer);
     })
+    
     this.httpService.getArbejdstype().subscribe((jobtype) => {
       this.dataSourceJT = new MatTableDataSource(jobtype);
     })
+
+    /* this.httpService.getKundeJob().subscribe((kundejob) => {
+      this.dataSourceKJ = new MatTableDataSource(kundejob);
+    }) */
   }
-  ngOnInit() {    
+  ngOnInit() {
   }
   OnLoggedOut(){
     localStorage.removeItem('IsLoggedIn') //fjerner IsLoggedIn fra storage, så man ikke kan komme ind.
@@ -141,7 +151,7 @@ export class AdminSideComponent implements OnInit {
       data: obj //Data : obj er for at fortælle programmet at i DialogBoxKundeComponent at dens objekt data henter data fra admin-sides obj.
     });
     dialogRef.afterClosed().subscribe(result => { //
-      if (result.event == 'Add') {  
+      if (result.event == 'Add') {
         this.addRowDataType(result.data);
       }
       else if (result.event == 'Update') { //Hvis knapperne i htmlen med eks.(openDialogType) i sig vil tage køre den operation som den har af værdi. eks. knappen med 'Update' i sig Vil blive sammenlignet her og kører update funktionen.
@@ -322,4 +332,13 @@ export class AdminSideComponent implements OnInit {
   applyFilterFiler(filterValue: string) {
     this.dataSourceF.filter = filterValue.trim().toLowerCase();
   }
+   /* getFilerKunde() {
+    this.httpService.getKundeJob().subscribe(
+      data => {
+        this.jobs,
+        this.kunder
+      }
+    )
+    console.log(this.filer, "+", this.kunder);  //dette er et forsøg på at lave en join mellem tabeller.
+  } */ 
 }

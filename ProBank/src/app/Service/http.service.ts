@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Filer } from '../Models/Filer';
 import { Kunde } from '../Models/Kunde';
 import { Arbejdstype } from '../Models/Arbejdstype';
@@ -36,7 +37,9 @@ export class HttpService {
 
   urlStart: string = "http://10.0.3.117:8085/api/"; //url for data lokation.
   adminl = new AdminLogin();
-
+  kunder : Kunde[];
+  kunde = new Kunde(); 
+  jobs : Job[]; 
   constructor(private http: HttpClient, private router: Router) { }
 
   //#region Services
@@ -52,6 +55,17 @@ export class HttpService {
   updateFiler(FilerIdFromHtml: number, FileToUpdate: Filer): Observable<Filer> {
     return this.http.put<Filer>(`${this.urlStart}filer/${FilerIdFromHtml}`, FileToUpdate, httpOptions); //Opdater data, så får den numret på rækken der skal opdateres og så hvilken tabel "Model" som den skal opdater med
   }
+
+  /* getKundeJob() {
+    return forkJoin<[any, any]>([
+      this.http.get(`${this.urlStart}kunde`).pipe(map((res:Response) => res.json())),
+      this.http.get(`${this.urlStart}filer`).pipe(map((res:Response) => res.json()))
+    ]).pipe(map((data: any) => {
+      this.kunde = data[0];
+      this.jobs = data[1];
+      return data;
+    }));  
+  } */
 
   getKunde(): Observable<Kunde[]> {
     return this.http.get<Kunde[]>(`${this.urlStart}kunde`);
