@@ -56,16 +56,16 @@ export class HttpService {
     return this.http.put<Filer>(`${this.urlStart}filer/${FilerIdFromHtml}`, FileToUpdate, httpOptions); //Opdater data, så får den numret på rækken der skal opdateres og så hvilken tabel "Model" som den skal opdater med
   }
 
-  /* getKundeJob() {
-    return forkJoin<[any, any]>([
-      this.http.get(`${this.urlStart}kunde`).pipe(map((res:Response) => res.json())),
-      this.http.get(`${this.urlStart}filer`).pipe(map((res:Response) => res.json()))
+  getKundeJob(): Observable<[Kunde, Job]> {
+    return forkJoin<any>([
+      this.http.get<Kunde[]>(`${this.urlStart}kunde`),
+      this.http.get<Job[]>(`${this.urlStart}jobs`)
     ]).pipe(map((data: any) => {
-      this.kunde = data[0];
+      this.kunde = data[0]
       this.jobs = data[1];
       return data;
     }));  
-  } */
+  } 
 
   getKunde(): Observable<Kunde[]> {
     return this.http.get<Kunde[]>(`${this.urlStart}kunde`);

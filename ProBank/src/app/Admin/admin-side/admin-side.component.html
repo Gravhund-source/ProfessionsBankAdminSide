@@ -71,77 +71,77 @@
     </table>
 </div>
 
-      <!--      ----       ----      --KundeJob--     ----      ----      ----   -->
-<div class="table-responsive">
+  <!--  ----       ----      --KundeJob--     ----      ----      ----   -->
+<!--<div class="table-responsive">
   <h1>Kunde&Job</h1>
-  <mat-form-field>
+  <mat-form-field>-->
     <!-- Find Kunde, søgefelt -->
-    <input (keyup)="applyFilterKunde($event.target.value)" matInput placeholder="Filter"> <!---->
-  </mat-form-field> 
+   <!-- <input (keyup)="applyFilterKunde($event.target.value)" matInput placeholder="Filter">--> <!---->
+  <!--</mat-form-field>  -->
 
   <!-- Tabel for Kunder, får informationer fra dataSource -->
-  <table mat-table [dataSource]="dataSourceKJ" matSort class="mat-table"> <!---->
+ <!-- <table mat-table [dataSource]="dataSourceKJ" matSort class="mat-table"> --> <!---->
 
     <!-- Fornavn Kolonne -->
     <!-- Display fornavn data for cellen -->
-    <ng-container matColumnDef="arbejdstype"> 
+    <!-- <ng-container matColumnDef="arbejdstype">  -->
       <!---->
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejdstype </th>
+      <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> Arbejdstype </th> -->
         <!---->
-        <td mat-cell *matCellDef="let element"> {{element.arbejdstype}} </td>
-      </ng-container>
+       <!--  <td mat-cell *matCellDef="let element"> {{element.arbejdstype}} </td>
+      </ng-container> -->
     
       <!-- Efternavn Kolonne -->
-      <ng-container matColumnDef="jobOverskrift">
+      <!--<ng-container matColumnDef="jobOverskrift">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Overskrift </th>
         <td mat-cell *matCellDef="let element"> {{element.jobOverskrift}} </td>
-      </ng-container>
+      </ng-container> -->
     
       <!-- Prostatus Kolonne -->
-      <ng-container matColumnDef="jobBeskrivelse">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Pro Status </th>
+     <!--  <ng-container matColumnDef="jobBeskrivelse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> job Beskrivelse </th>
         <td mat-cell *matCellDef="let element"> {{element.jobBeskrivelse}} </td>
-      </ng-container>
+      </ng-container>-->
     
       <!-- Antal Sendte Ansøgninger Kolonne -->
-      <ng-container matColumnDef="jobStartTidspunkt">
+     <!--  <ng-container matColumnDef="jobStartTidspunkt">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> job StartTidspunkt </th>
           <td mat-cell *matCellDef="let element"> {{element.jobStartTidspunkt}} </td>
-        </ng-container>
+        </ng-container>-->
   
         <!-- Arbejde Nr. 1 Kolonne -->
-      <ng-container matColumnDef="jobSlutTidspunkt">
+     <!--  <ng-container matColumnDef="jobSlutTidspunkt">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> job SlutTidspunkt </th>
           <td mat-cell *matCellDef="let element"> {{element.jobSlutTidspunkt}} </td>
-        </ng-container>
+        </ng-container>-->
         <!-- Arbejde Nr. 2 Kolonne -->
-        <ng-container matColumnDef="kundeID">
+      <!--   <ng-container matColumnDef="kundeID">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> kunde </th>
           <td mat-cell *matCellDef="let element"> {{element.kundeID}} </td>
-        </ng-container>
+        </ng-container>-->
       
         <!-- Arbejde Nr. 3 Kolonne -->
-        <ng-container matColumnDef="kundeProID">
+       <!--  <ng-container matColumnDef="kundeProID">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Pro kunde </th>
             <td mat-cell *matCellDef="let element"> {{element.kundeProID}} </td> 
-        </ng-container>
+        </ng-container>-->
 
         <!-- Aktions Kolonne -->
-        <ng-container matColumnDef="action">
+       <!--  <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktioner </th>
-          <td mat-cell *matCellDef="let element" class="action-link"> 
+          <td mat-cell *matCellDef="let element" class="action-link"> -->
             <!---->
-            <button mat-button color="accent" (click)="openDialogJob('Update',element)">Rediger</button> |
-            <button mat-button color="primary" (click)="openDialogJob('Delete',element)">Slet</button>
+        <!--     <button mat-button color="accent" (click)="openDialogKundeJob('Update',element)">Rediger</button> |
+            <button mat-button color="primary" (click)="openDialogKundeJob('Delete',element)">Slet</button>
           </td> 
-      </ng-container>
+      </ng-container>-->
 
       <!-- Display Kunde for header -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsKJ"></tr>
+     <!--  <tr mat-header-row *matHeaderRowDef="displayedColumnsKJ"></tr>-->
       <!-- Display Kunde for header -->
-      <tr mat-row *matRowDef="let row; columns: displayedColumnsKJ;"></tr>
+     <!--  <tr mat-row *matRowDef="let row; columns: displayedColumnsKJ;"></tr>
     </table>
-</div>
+</div> -->
 
 <!--      ----       ----      --Job--     ----      ----      ----   -->
 

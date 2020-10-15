@@ -26,6 +26,7 @@ import { DialogBoxJobComponent } from './dialog-box-job/dialog-box-job.component
 import { DialogBoxFilerComponent } from './dialog-box-filer/dialog-box-filer.component';
 import { DialogBoxKundeComponent } from './dialog-box-kunde/dialog-box-kunde.component';
 import { AuthGuard } from './auth.guard';
+import { DialogBoxKundejobComponent } from './dialog-box-kundejob/dialog-box-kundejob.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthGuard } from './auth.guard';
     DialogBoxJobComponent,
     DialogBoxFilerComponent,
     DialogBoxKundeComponent,
+    DialogBoxKundejobComponent,
   ],
   imports: [
     BrowserModule,

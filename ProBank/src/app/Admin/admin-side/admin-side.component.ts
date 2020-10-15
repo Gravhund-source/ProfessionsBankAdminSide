@@ -15,6 +15,7 @@ import { DialogBoxFilerComponent } from 'src/app/dialog-box-filer/dialog-box-fil
 import { DialogBoxJobComponent } from 'src/app/dialog-box-job/dialog-box-job.component';
 import { SignInComponent} from 'src/app/Login/sign-in/sign-in.component';
 import { switchMap, tap } from 'rxjs/operators';
+import { DialogBoxKundejobComponent } from 'src/app/dialog-box-kundejob/dialog-box-kundejob.component';
 
 @Component({
   selector: 'app-admin-side',
@@ -57,13 +58,13 @@ export class AdminSideComponent implements OnInit {
   dataSourceJT: MatTableDataSource<Arbejdstype>;
   dataSourceF: MatTableDataSource<Filer>;
   dataSource: MatTableDataSource<Kunde>;
-  dataSourceKJ: MatTableDataSource<[Kunde, Job]>;
+/*   dataSourceKJ: MatTableDataSource<[Kunde, Job]>; */
 
   displayedColumns = ['fornavn', 'efternavn', 'proStatus', 'sendtAnsoegning', 'godkendtArb01', 'godkendtArb02', 'godkendtArb03', 'action'];
   displayedColumnsJT = ['arbejdstype1', 'arbejdstypeBeskrivelse', 'action'];
   displayedColumnsJ = ['arbejdstype', 'jobOverskrift', 'jobBeskrivelse', 'jobStartTidspunkt', 'jobSlutTidspunkt', 'action'];
   displayedColumnsF = ['dokumentationLink', 'billedeLink', 'action']; //'Fornavn',
-  displayedColumnsKJ = ['arbejdstype', 'jobOverskrift', 'jobBeskrivelse', 'jobStartTidspunkt', 'jobSlutTidspunkt', 'kundeID', 'kundeProID', 'action'];
+  /* displayedColumnsKJ = ['arbejdstype', 'jobOverskrift', 'jobBeskrivelse', 'jobStartTidspunkt', 'jobSlutTidspunkt', 'kundeID', 'kundeProID', 'action']; */
 
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   //#region (KS) Constructor og Get
@@ -92,9 +93,9 @@ export class AdminSideComponent implements OnInit {
       this.dataSourceJT = new MatTableDataSource(jobtype);
     })
 
-    /* this.httpService.getKundeJob().subscribe((kundejob) => {
-      this.dataSourceKJ = new MatTableDataSource(kundejob);
-    }) */
+     /* this.httpService.getKundeJob().subscribe((kundejob) => {
+      this.dataSourceKJ = new MatTableDataSource([kundejob]);
+    }) */ 
   }
   ngOnInit() {
   }
@@ -274,6 +275,45 @@ export class AdminSideComponent implements OnInit {
     return true;
   }
 
+  /* openDialogKundeJob(action, obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxKundejobComponent, {
+      width: '600px',
+      height: '600px',
+      data: obj
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event == 'Update') {
+        this.updateRowDataKundeJob(result.data);
+      }
+      else if (result.event == 'Delete') {
+        this.deleteRowDataKundeJob(result.data);
+      }
+    });
+  }
+  updateRowDataKundeJob(row_obj) {
+    this.jobs = this.dataSourceJ.data.filter((value, key) => {
+      if (value.jobId == row_obj.jobId) {
+        value.jobId = row_obj.jobId;
+        value.arbejdstype = parseInt(row_obj.arbejdstype);
+        value.jobOverskrift = row_obj.jobOverskrift;
+        value.jobBeskrivelse = row_obj.jobBeskrivelse;
+        value.kundeId = parseInt(row_obj.kundeId);
+        value.kundeProId = parseInt(row_obj.kundeProId);
+        value.jobStartTidspunkt = row_obj.jobStartTidspunkt;
+        value.jobSlutTidspunkt = row_obj.jobSlutTidspunkt;
+        delete value["action"];
+        return this.httpService.updateJob(value.jobId, value).subscribe();
+      }
+    });
+  }
+  deleteRowDataKundeJob(row_obj) {
+    this.jobs = this.dataSourceJ.data.filter((jobObj) =>
+      jobObj.jobId !== row_obj.jobId, this.httpService.deleteJob(row_obj.jobId).subscribe());
+    console.log(row_obj.jobId);
+    return true;
+  } */
+
   openDialogFiler(action, obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxFilerComponent, {
@@ -332,13 +372,4 @@ export class AdminSideComponent implements OnInit {
   applyFilterFiler(filterValue: string) {
     this.dataSourceF.filter = filterValue.trim().toLowerCase();
   }
-   /* getFilerKunde() {
-    this.httpService.getKundeJob().subscribe(
-      data => {
-        this.jobs,
-        this.kunder
-      }
-    )
-    console.log(this.filer, "+", this.kunder);  //dette er et forsøg på at lave en join mellem tabeller.
-  } */ 
 }
